@@ -27,7 +27,7 @@ Untuk meningkatkan penjualan toko berdasarkan perilaku konsumen pada data penjua
 Bagaimana pola pembelian konsumen dari data penjualan untuk meningkatkan tingkat penjualan produk?
 
 ```{code-cell}
-pip install pandas numpy matplotlib seaborn mlxtend
+pip install matplotlib seaborn mlxtend
 ```
 
 ```{code-cell}
