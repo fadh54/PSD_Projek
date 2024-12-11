@@ -12,6 +12,8 @@ kernelspec:
   name: python3
 ---
 
+# Projek 2
+
 # Prediksi Penjualan Retai
 
 ### Latar Belakang

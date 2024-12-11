@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Analisis Perilaku Konsumen Berdasarkan Data Penjualan Retail &#8212; Proyek Sains Data</title>
+    <title>Projek 1 &#8212; Proyek Sains Data</title>
   
   
   
@@ -63,7 +63,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'projek1';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Prediksi Jumlah Pengunjung Coffee Shop" href="projek2.html" />
+    <link rel="next" title="Projek 2" href="projek2.html" />
     <link rel="prev" title="Proyek Sains Data" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -169,8 +169,13 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Analisis Perilaku Konsumen Berdasarkan Data Penjualan Retail</a></li>
-<li class="toctree-l1"><a class="reference internal" href="projek2.html">Prediksi Jumlah Pengunjung Coffee Shop</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Projek 1</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="projek2.html">Projek 2</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="projek3.html">Projek 3</a></li>
+
 </ul>
 
     </div>
@@ -348,7 +353,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Analisis Perilaku Konsumen Berdasarkan Data Penjualan Retail</h1>
+    <h1>Projek 1</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -358,6 +363,8 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Projek 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-perilaku-konsumen-berdasarkan-data-penjualan-retail">Analisis Perilaku Konsumen Berdasarkan Data Penjualan Retail</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumusan-masalah">Rumusan Masalah</a></li>
@@ -369,6 +376,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-minning">Data Minning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
 </ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -379,7 +389,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="analisis-perilaku-konsumen-berdasarkan-data-penjualan-retail">
+  <section class="tex2jax_ignore mathjax_ignore" id="projek-1">
+<h1>Projek 1<a class="headerlink" href="#projek-1" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="analisis-perilaku-konsumen-berdasarkan-data-penjualan-retail">
 <h1>Analisis Perilaku Konsumen Berdasarkan Data Penjualan Retail<a class="headerlink" href="#analisis-perilaku-konsumen-berdasarkan-data-penjualan-retail" title="Link to this heading">#</a></h1>
 <section id="latar-belakang">
 <h2>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h2>
@@ -399,12 +412,43 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>^C
-Requirement already satisfied: matplotlib in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (3.7.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: matplotlib in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (3.7.1)
 Collecting seaborn
+  Downloading seaborn-0.13.2-py3-none-any.whl (294 kB)
+                                              0.0/294.9 kB ? eta -:--:--
+     ---                                   30.7/294.9 kB 640.0 kB/s eta 0:00:01
+     -----                                 41.0/294.9 kB 487.6 kB/s eta 0:00:01
+     -------------                        112.6/294.9 kB 930.9 kB/s eta 0:00:01
+     --------------                       122.9/294.9 kB 717.5 kB/s eta 0:00:01
+     ---------------------                174.1/294.9 kB 803.1 kB/s eta 0:00:01
+     -----------------------------        245.8/294.9 kB 942.1 kB/s eta 0:00:01
+     ------------------------------------ 294.9/294.9 kB 958.5 kB/s eta 0:00:00
+Collecting mlxtend
+  Using cached mlxtend-0.23.3-py3-none-any.whl (1.4 MB)
+Requirement already satisfied: contourpy&gt;=1.0.1 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (1.0.7)
+Requirement already satisfied: cycler&gt;=0.10 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (0.11.0)
+Requirement already satisfied: fonttools&gt;=4.22.0 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (4.39.4)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (1.4.4)
+Requirement already satisfied: numpy&gt;=1.20 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (1.24.3)
+Requirement already satisfied: packaging&gt;=20.0 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (23.1)
+Requirement already satisfied: pillow&gt;=6.2.0 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (9.5.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (3.0.9)
+Requirement already satisfied: python-dateutil&gt;=2.7 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from matplotlib) (2.8.2)
+Requirement already satisfied: pandas&gt;=1.2 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from seaborn) (2.2.3)
+Requirement already satisfied: scipy&gt;=1.2.1 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from mlxtend) (1.14.1)
+Requirement already satisfied: scikit-learn&gt;=1.3.1 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from mlxtend) (1.5.2)
+Requirement already satisfied: joblib&gt;=0.13.2 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from mlxtend) (1.4.2)
+Requirement already satisfied: pytz&gt;=2020.1 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from pandas&gt;=1.2-&gt;seaborn) (2024.2)
+Requirement already satisfied: tzdata&gt;=2022.7 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from pandas&gt;=1.2-&gt;seaborn) (2024.2)
+Requirement already satisfied: six&gt;=1.5 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib) (1.16.0)
+Requirement already satisfied: threadpoolctl&gt;=3.1.0 in c:\users\asus\appdata\local\programs\python\python310\lib\site-packages (from scikit-learn&gt;=1.3.1-&gt;mlxtend) (3.5.0)
+Installing collected packages: seaborn, mlxtend
+Successfully installed mlxtend-0.23.3 seaborn-0.13.2
+Note: you may need to restart the kernel to use updated packages.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Note: you may need to restart the kernel to use updated packages.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 23.1.2 -&gt; 24.3.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
 </pre></div>
 </div>
 </div>
@@ -421,6 +465,20 @@ Collecting seaborn
 <span class="kn">from</span> <span class="nn">mlxtend.frequent_patterns</span> <span class="kn">import</span> <span class="n">association_rules</span>
 <span class="c1"># pip install apyori</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">apyori</span> <span class="kn">import</span> <span class="n">apriori</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">mlxtend.frequent_patterns</span> <span class="kn">import</span> <span class="n">apriori</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span> <span class="nn">mlxtend.frequent_patterns</span> <span class="kn">import</span> <span class="n">association_rules</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;apyori&#39;
 </pre></div>
 </div>
 </div>
@@ -635,7 +693,7 @@ Minuman, Susu, and Kosmetik.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Prediksi Jumlah Pengunjung Coffee Shop</p>
+        <p class="prev-next-title">Projek 2</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -656,6 +714,8 @@ Minuman, Susu, and Kosmetik.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Projek 1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-perilaku-konsumen-berdasarkan-data-penjualan-retail">Analisis Perilaku Konsumen Berdasarkan Data Penjualan Retail</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumusan-masalah">Rumusan Masalah</a></li>
@@ -667,6 +727,9 @@ Minuman, Susu, and Kosmetik.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-minning">Data Minning</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation">Interpretation</a></li>
 </ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>

@@ -12,6 +12,8 @@ kernelspec:
   name: python3
 ---
 
+# Projek 1
+
 # Analisis Perilaku Konsumen Berdasarkan Data Penjualan Retail
 
 ### Latar Belakang
