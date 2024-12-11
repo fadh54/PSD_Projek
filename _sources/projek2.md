@@ -40,13 +40,12 @@ from sklearn.datasets import make_regression
 from sklearn.linear_model import LinearRegression
 from sklearn.svm import SVR
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, mean_absolute_percentage_error
-import xgboost as xgb
 ```
 
 ```{code-cell}
 data = 'https://raw.githubusercontent.com/fadh54/Tugas_PSD/refs/heads/main/sales_coffe.csv'
 df_baru = pd.read_csv(data, delimiter=';')
-df_baru
+print(df_baru)
 ```
 
 Menampilkan data yang akan digunakan untuk melakukan prediksi

@@ -422,19 +422,6 @@
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
 <span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span>
-<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span>
-<span class="ne">---&gt; </span><span class="mi">13</span> <span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;xgboost&#39;
 </pre></div>
 </div>
 </div>
@@ -443,7 +430,25 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/fadh54/Tugas_PSD/refs/heads/main/sales_coffe.csv&#39;</span>
 <span class="n">df_baru</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
-<span class="n">df_baru</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_baru</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           date  jumlah_pengunjung
+0    01/03/2024                 11
+1    02/03/2024                  7
+2    03/03/2024                 10
+3    04/03/2024                  4
+4    05/03/2024                  9
+..          ...                ...
+213  03/10/2024                  8
+214  04/10/2024                  9
+215  05/10/2024                  6
+216  06/10/2024                 20
+217  07/10/2024                 12
+
+[218 rows x 2 columns]
 </pre></div>
 </div>
 </div>
@@ -469,6 +474,56 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>jumlah_pengunjung</th>
+    </tr>
+    <tr>
+      <th>date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2024-03-01</th>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>2024-03-02</th>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2024-03-03</th>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2024-03-04</th>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2024-03-05</th>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -476,11 +531,22 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;date&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/c7543250e7d2ada66a451cdda2d4bb88b53667756c397fb36e22c0370acd5cd2.png" src="_images/c7543250e7d2ada66a451cdda2d4bb88b53667756c397fb36e22c0370acd5cd2.png" />
+</div>
 </div>
 <p>Menampilkan grafik data pengunjung dari tanggal 01/03/2024 sampai dengan tanggal 07/10/2024</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baru</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(218, 1)
 </pre></div>
 </div>
 </div>
@@ -491,10 +557,28 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+DatetimeIndex: 218 entries, 2024-03-01 to 2024-10-07
+Data columns (total 1 columns):
+ #   Column             Non-Null Count  Dtype
+---  ------             --------------  -----
+ 0   jumlah_pengunjung  218 non-null    int64
+dtypes: int64(1)
+memory usage: 3.4 KB
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baru</span><span class="o">.</span><span class="n">dtypes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jumlah_pengunjung    int64
+dtype: object
 </pre></div>
 </div>
 </div>
@@ -505,6 +589,12 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jumlah_pengunjung    0
+dtype: int64
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -512,6 +602,64 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>jumlah_pengunjung</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>218.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>8.394495</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>4.458758</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>5.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>8.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>11.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>24.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 <section id="data-pre-processing">
@@ -539,6 +687,16 @@
 <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   lag_3  lag_2  lag_1  target
+0     11      7     10       4
+1      7     10      4       9
+2     10      4      9       5
+3      4      9      5       6
+4      9      5      6       8
 </pre></div>
 </div>
 </div>
@@ -574,6 +732,16 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      lag_3     lag_2     lag_1    target
+0  0.434783  0.260870  0.391304  0.130435
+1  0.260870  0.391304  0.130435  0.347826
+2  0.391304  0.130435  0.347826  0.173913
+3  0.130435  0.347826  0.173913  0.217391
+4  0.347826  0.173913  0.217391  0.304348
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -588,6 +756,12 @@
 <span class="c1"># Menampilkan jumlah data train dan test</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data train:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data test:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah data train: 172
+Jumlah data test: 43
 </pre></div>
 </div>
 </div>
@@ -662,6 +836,12 @@ $<span class="math notranslate nohighlight">\(
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\ensemble\_bagging.py:581: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  return column_or_1d(y, warn=True)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -702,6 +882,12 @@ $<span class="math notranslate nohighlight">\(
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jumlah pengunjung 3 hari ke depan  [0.4217391304347828, 0.33260869565217405, 0.4304347826086956]
+</pre></div>
+</div>
+<img alt="_images/9f0f6f2df217a0a04e25d90f9279fe14eda6e51082e53f44b589adff211cdd31.png" src="_images/9f0f6f2df217a0a04e25d90f9279fe14eda6e51082e53f44b589adff211cdd31.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -713,6 +899,16 @@ $<span class="math notranslate nohighlight">\(
 <span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Bagging Regressor&#39;</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> MSE: </span><span class="si">{</span><span class="n">mse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAE: </span><span class="si">{</span><span class="n">mae</span><span class="si">}</span><span class="se">\n</span><span class="s2"> RMSE: </span><span class="si">{</span><span class="n">rmse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> R²: </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAPE: </span><span class="si">{</span><span class="n">mape</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bagging Regressor 
+ MSE: 0.03836109377060711
+ MAE: 0.15534209639366364
+ RMSE: 0.19585988300468044
+ R²: -0.02039028064831938
+ MAPE: 32331200560496.82%
 </pre></div>
 </div>
 </div>
@@ -739,6 +935,12 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon
 <span class="n">model_linear</span> <span class="o">=</span> <span class="n">BaggingRegressor</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">LinearRegression</span><span class="p">(),</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">model_linear</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">y_pred_linear</span> <span class="o">=</span> <span class="n">model_linear</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\ensemble\_bagging.py:581: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  return column_or_1d(y, warn=True)
 </pre></div>
 </div>
 </div>
@@ -782,6 +984,12 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jumlah pengunjung 3 hari ke depan  [0.4057041903961848, 0.43782460834610015, 0.39629435861884466]
+</pre></div>
+</div>
+<img alt="_images/0c3c2150ea309bd8287296efa120d381d7c10412e8eafcc4a79b62e6b4159499.png" src="_images/0c3c2150ea309bd8287296efa120d381d7c10412e8eafcc4a79b62e6b4159499.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -792,6 +1000,16 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon
 <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_linear</span><span class="p">)</span>
 <span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_linear</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Linear Regression&#39;</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> MSE: </span><span class="si">{</span><span class="n">mse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAE: </span><span class="si">{</span><span class="n">mae</span><span class="si">}</span><span class="se">\n</span><span class="s2"> RMSE: </span><span class="si">{</span><span class="n">rmse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> R²: </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAPE: </span><span class="si">{</span><span class="n">mape</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear Regression 
+ MSE: 0.03203098961882884
+ MAE: 0.13880708757109858
+ RMSE: 0.17897203585708255
+ R²: 0.1479880453345349
+ MAPE: 23832338379330.22%
 </pre></div>
 </div>
 </div>
@@ -814,6 +1032,12 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon
 <span class="n">model_svm</span> <span class="o">=</span> <span class="n">BaggingRegressor</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">model_svm</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">model_svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">y_pred_svm</span> <span class="o">=</span> <span class="n">model_svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\ensemble\_bagging.py:581: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+  return column_or_1d(y, warn=True)
 </pre></div>
 </div>
 </div>
@@ -857,6 +1081,12 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediksi jumlah pengunjung 3 hari ke depan: [0.353555949243501, 0.36005063084462036, 0.41199429058249065]
+</pre></div>
+</div>
+<img alt="_images/67b665cdfcd87fdfeb585c368ef66e766e9df29c436c6a4985fb3525d1225748.png" src="_images/67b665cdfcd87fdfeb585c368ef66e766e9df29c436c6a4985fb3525d1225748.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -867,6 +1097,16 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon
 <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_svm</span><span class="p">)</span>
 <span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_svm</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Support Vector Machine&#39;</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> MSE: </span><span class="si">{</span><span class="n">mse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAE: </span><span class="si">{</span><span class="n">mae</span><span class="si">}</span><span class="se">\n</span><span class="s2"> RMSE: </span><span class="si">{</span><span class="n">rmse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> R²: </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAPE: </span><span class="si">{</span><span class="n">mape</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Support Vector Machine 
+ MSE: 0.032661112624533487
+ MAE: 0.13405745187860996
+ RMSE: 0.18072385737509447
+ R²: 0.13122701671322412
+ MAPE: 23047114794907.586%
 </pre></div>
 </div>
 </div>
