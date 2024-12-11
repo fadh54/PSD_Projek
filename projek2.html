@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Prediksi Jumlah Pengunjung Coffee Shop &#8212; Proyek Sains Data</title>
+    <title>Prediksi Penjualan Retai &#8212; Proyek Sains Data</title>
   
   
   
@@ -60,11 +60,10 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'projek2';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Prediksi Jumlah Pengunjung Coffee Shop" href="projek3.html" />
     <link rel="prev" title="Analisis Perilaku Konsumen Berdasarkan Data Penjualan Retail" href="projek1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -171,7 +170,9 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="projek1.html">Analisis Perilaku Konsumen Berdasarkan Data Penjualan Retail</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Prediksi Jumlah Pengunjung Coffee Shop</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Prediksi Penjualan Retai</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="projek3.html">Prediksi Jumlah Pengunjung Coffee Shop</a></li>
 </ul>
 
     </div>
@@ -349,7 +350,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Prediksi Jumlah Pengunjung Coffee Shop</h1>
+    <h1>Prediksi Penjualan Retai</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -359,29 +360,15 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Prediksi Penjualan Retai</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumusan-masalah">Rumusan masalah</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-pre-processing">Data Pre-Processing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sliding-window">Sliding Window</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi">Normalisasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumusan-masalah">Rumusan Masalah</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data">Transformasi Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model">Evaluasi Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mse-mean-squared-error">1. MSE (Mean Squared Error)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rmse-root-mean-squared-error">2. RMSE (Root Mean Squared Error)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mape-mean-absolute-percentage-error">3. MAPE (Mean Absolute Percentage Error)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-data-preprocessing">Step 2: Data Preprocessing</a></li>
 </ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#begging-regresor">Begging Regresor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-vector-machine">Support Vector Machine</a></li>
-</ul>
-</li>
-</ul>
+
             </nav>
         </div>
     </div>
@@ -392,728 +379,215 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="prediksi-jumlah-pengunjung-coffee-shop">
-<h1>Prediksi Jumlah Pengunjung Coffee Shop<a class="headerlink" href="#prediksi-jumlah-pengunjung-coffee-shop" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="prediksi-penjualan-retai">
+<h1>Prediksi Penjualan Retai<a class="headerlink" href="#prediksi-penjualan-retai" title="Link to this heading">#</a></h1>
 <section id="latar-belakang">
 <h2>Latar Belakang<a class="headerlink" href="#latar-belakang" title="Link to this heading">#</a></h2>
-<p>Coffee shop telah menjadi bagian penting dalam gaya hidup masyarakat modern, Tidak hanya menjadi tempat untuk menikmati kopi, coffee shop juga berfungsi sebagai tempat bersosialisasi, bekerja, belajar, dan bahkan menghadiri berbagai acara. Dengan semakin banyaknya coffee shop yang bermunculan, persaingan antar bisnis semakin ketat. Maka diperlukan kemampuan untuk memprediksi jumlah pengunjung. Data yang digunakan dalam pengerjaan tugas ini berupa data time series penjualan coffe sales yang didapat dari website kaggle <a class="reference external" href="https://www.kaggle.com/datasets/ihelon/coffee-sales/data">Coffe Sales</a>. Dengan memprediksi jumlah pengunjung yang membeli di coffe sales 3 hari kedepan.</p>
+<p>Di era digital saat ini, pemilik retail harus mampu memahami strategi pemasaran yang efektif. Dengan begitu pemilik retail dapat dengan mudah mengatur kesediaan produk yang akan dipasarkan</p>
 </section>
 <section id="tujuan">
 <h2>Tujuan<a class="headerlink" href="#tujuan" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Untuk mengoptimalkan perencanaan operasional</p></li>
-<li><p>Untuk meningkatkan efisiensi biaya produksi dan tenaga kerja</p></li>
-</ul>
+<p>Untuk mengelola peningkatan penjualan toko retail</p>
 </section>
 <section id="rumusan-masalah">
-<h2>Rumusan masalah<a class="headerlink" href="#rumusan-masalah" title="Link to this heading">#</a></h2>
-<p>Bagaimana prediksi jumlah pengunjung dalam kurun waktu 3 hari kedepan?</p>
+<h2>Rumusan Masalah<a class="headerlink" href="#rumusan-masalah" title="Link to this heading">#</a></h2>
+<p>Bagaimana prediksi penjualan 7 hari kedepan?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
-<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">BaggingRegressor</span>
-<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">mean_absolute_percentage_error</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/fadh54/Tugas_PSD/refs/heads/main/sales_coffe.csv&#39;</span>
-<span class="n">df_baru</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df_baru</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 1: Load the dataset</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/fadh54/Tugas_PSD/refs/heads/main/Retail.csv&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>           date  jumlah_pengunjung
-0    01/03/2024                 11
-1    02/03/2024                  7
-2    03/03/2024                 10
-3    04/03/2024                  4
-4    05/03/2024                  9
-..          ...                ...
-213  03/10/2024                  8
-214  04/10/2024                  9
-215  05/10/2024                  6
-216  06/10/2024                 20
-217  07/10/2024                 12
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      InvoiceNo       InvoiceDate  BRANCH_SPLR BRANCHNAME_SPLR  \
+0        536365  01/12/2020 08:26           13       SAMARINDA   
+1        536365  01/12/2020 08:26           13       SAMARINDA   
+2        536365  01/12/2020 08:26           13       SAMARINDA   
+3        536365  01/12/2020 08:26           13       SAMARINDA   
+4        536367  01/12/2020 08:34           13       SAMARINDA   
+...         ...               ...          ...             ...   
+45255    574336  04/11/2021 09:52           36      PURWOKERTO   
+45256    574336  04/11/2021 09:52           36      PURWOKERTO   
+45257    574336  04/11/2021 09:52           36      PURWOKERTO   
+45258    574336  04/11/2021 09:52           36      PURWOKERTO   
+45259    574336  04/11/2021 09:52           36      PURWOKERTO   
 
-[218 rows x 2 columns]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Menampilkan data yang akan digunakan untuk melakukan prediksi</p>
-</section>
-<section id="data-understanding">
-<h2>Data Understanding<a class="headerlink" href="#data-understanding" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Merubah kolom &#39;Date&#39; dalam format datetime dengan dayfirst=True</span>
-<span class="n">df_baru</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df_baru</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">dayfirst</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+      warehouseProductsID    BARCODEID StockCode                    PRODUCT  \
+0                   10001  8,99275E+12    85123A    123 BENDERA COKLAT 300G   
+1                   20020  8,99991E+12     71053               2.3.4 FILTER   
+2                   20018  8,99991E+12    84029G             234 KERETEK 12   
+3                   20007  8,99278E+12     21730    2TANG AIR MINERAL 240ML   
+4                   20011  8,99278E+12     84879          2TANG SPORT 500ML   
+...                   ...          ...       ...                        ...   
+45255               P0079  9,55603E+12     23366   PALM. RADIANT SKIN 100GR   
+45256               P0070  8,85001E+12     23493    PALM. ANTI STRESS 250ML   
+45257               P0070  8,85001E+12     21993    PALM. ANTI STRESS 250ML   
+45258               P0069  9,55603E+12     23209  PALM. A-T SENSUAL 750ML B   
+45259               P0067  9,55603E+12     23480   PALM. A-T ENERGY 750ML B   
 
-<span class="c1"># Mengatur kolom &#39;Date&#39; sebagai indeks</span>
-<span class="n">df_baru</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baru</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+      PRODUCT_CATEGORY  Quantity  ... CustomerID                    CUSTNAME  \
+0                 SUSU         6  ...    17850.0     DUA PUTRI SLAMET RIYADI   
+1                ROKOK         6  ...    17850.0                      SANURI   
+2                ROKOK         6  ...    17850.0       RISKA CELL ADAM MALIK   
+3              MINUMAN         6  ...    17850.0            TOMMY BERSAUDARA   
+4              MINUMAN        32  ...    13047.0                       GONIK   
+...                ...       ...  ...        ...                         ...   
+45255  SABUN &amp; SAMPHOO        16  ...    12397.0                MAMO MMO0111   
+45256  SABUN &amp; SAMPHOO        10  ...    12397.0        AL IMRON, TK IMR0162   
+45257  SABUN &amp; SAMPHOO        12  ...    12397.0  SAHABAT KAMPUS, SWLYN0101P   
+45258  SABUN &amp; SAMPHOO        10  ...    12397.0          BERKAH, TK BKH0181   
+45259  SABUN &amp; SAMPHOO         8  ...    12397.0      BALAI DESA, TK BLD0124   
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+                                      ADDRESS               KOTA  \
+0                           JL. SLAMET RIYADI          SAMARINDA   
+1                                 JL. M. SAID          SAMARINDA   
+2                              JL. ADAM MALIK          SAMARINDA   
+3                            JL. ADAM MALIK 2          SAMARINDA   
+4                             JL. AM. RIFADIN  KUTAI KARTANEGARA   
+...                                       ...                ...   
+45255                                  LUMBIR           BANYUMAS   
+45256                                  TRITIH            CILACAP   
+45257  JL. LETJEND POL. SOEMARTO KARANG JAMBU           BANYUMAS   
+45258                               NUSAWUNGU            CILACAP   
+45259                             PURBALINGGA        PURBALINGGA   
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>jumlah_pengunjung</th>
-    </tr>
-    <tr>
-      <th>date</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2024-03-01</th>
-      <td>11</td>
-    </tr>
-    <tr>
-      <th>2024-03-02</th>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>2024-03-03</th>
-      <td>10</td>
-    </tr>
-    <tr>
-      <th>2024-03-04</th>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>2024-03-05</th>
-      <td>9</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baru</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Axes: xlabel=&#39;date&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/c7543250e7d2ada66a451cdda2d4bb88b53667756c397fb36e22c0370acd5cd2.png" src="_images/c7543250e7d2ada66a451cdda2d4bb88b53667756c397fb36e22c0370acd5cd2.png" />
-</div>
-</div>
-<p>Menampilkan grafik data pengunjung dari tanggal 01/03/2024 sampai dengan tanggal 07/10/2024</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baru</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(218, 1)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baru</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-DatetimeIndex: 218 entries, 2024-03-01 to 2024-10-07
-Data columns (total 1 columns):
- #   Column             Non-Null Count  Dtype
----  ------             --------------  -----
- 0   jumlah_pengunjung  218 non-null    int64
-dtypes: int64(1)
-memory usage: 3.4 KB
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baru</span><span class="o">.</span><span class="n">dtypes</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jumlah_pengunjung    int64
-dtype: object
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baru</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jumlah_pengunjung    0
-dtype: int64
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_baru</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
+               PROVINSI     NEGARA CHANNELID_SPLR CHANNELNAME_SPLR SUBDISTID  \
+0      KALIMANTAN TIMUR  INDONESIA             32   Toko Kelontong    130113   
+1      KALIMANTAN TIMUR  INDONESIA             32   Toko Kelontong    130113   
+2      KALIMANTAN TIMUR  INDONESIA             32   Toko Kelontong    130113   
+3      KALIMANTAN TIMUR  INDONESIA             32   Toko Kelontong    130113   
+4      KALIMANTAN TIMUR  INDONESIA             32   Toko Kelontong    130113   
+...                 ...        ...            ...              ...       ...   
+45255       JAWA TENGAH  INDONESIA             32   Toko Kelontong    320302   
+45256       JAWA TENGAH  INDONESIA             32   Toko Kelontong    320302   
+45257       JAWA TENGAH  INDONESIA             32   Toko Kelontong    320302   
+45258       JAWA TENGAH  INDONESIA             32   Toko Kelontong    320302   
+45259       JAWA TENGAH  INDONESIA             32   Toko Kelontong    320302   
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
+             SUBDIST_NAME  
+0           CV. EKA PUTRA  
+1           CV. EKA PUTRA  
+2           CV. EKA PUTRA  
+3           CV. EKA PUTRA  
+4           CV. EKA PUTRA  
+...                   ...  
+45255  CV. CITRA BERUSAHA  
+45256  CV. CITRA BERUSAHA  
+45257  CV. CITRA BERUSAHA  
+45258  CV. CITRA BERUSAHA  
+45259  CV. CITRA BERUSAHA  
 
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>jumlah_pengunjung</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td>218.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>8.394495</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>4.458758</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>5.000000</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>8.000000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>11.000000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>24.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-</section>
-<section id="data-pre-processing">
-<h2>Data Pre-Processing<a class="headerlink" href="#data-pre-processing" title="Link to this heading">#</a></h2>
-<p>Data pre-pocessing adalah proses mengolah data mentah yang didapat menjadi data yang lebih bersih agar mudah untuk diolah</p>
-<section id="sliding-window">
-<h3>Sliding Window<a class="headerlink" href="#sliding-window" title="Link to this heading">#</a></h3>
-<p>melakukan slidding window untuk mendapatkan data penjualan 3 hari sebelumnya yang akan digunakan untuk melakukan prediksi jumlah pengunjung</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sliding_window</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">window_size</span><span class="p">):</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="n">window_size</span><span class="p">):</span>
-        <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="n">window_size</span><span class="p">)]</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">window_size</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-<span class="c1"># Menggunakan fungsi sliding window</span>
-<span class="n">window_size</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sliding_window</span><span class="p">(</span><span class="n">df_baru</span><span class="p">[</span><span class="s1">&#39;jumlah_pengunjung&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">window_size</span><span class="p">)</span>
-
-<span class="c1"># Menampilkan hasil</span>
-<span class="n">X</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;lag_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">window_size</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
-<span class="n">y</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   lag_3  lag_2  lag_1  target
-0     11      7     10       4
-1      7     10      4       9
-2     10      4      9       5
-3      4      9      5       6
-4      9      5      6       8
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="normalisasi">
-<h3>Normalisasi<a class="headerlink" href="#normalisasi" title="Link to this heading">#</a></h3>
-<p>data slidding window yang sudah didapatkan akan dinormalisasi</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="n">df_baru</span><span class="p">[</span><span class="s1">&#39;jumlah_pengunjung&#39;</span><span class="p">]</span>
-
-<span class="c1"># Scale data</span>
-<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
-<span class="n">df_baru</span><span class="p">[</span><span class="s1">&#39;jumlah_pengunjung&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df_baru</span><span class="p">[[</span><span class="s1">&#39;jumlah_pengunjung&#39;</span><span class="p">]])</span>
-
-<span class="k">def</span> <span class="nf">normalisasi_sliding_window</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">window_size</span><span class="p">):</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="n">window_size</span><span class="p">):</span>
-        <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="n">window_size</span><span class="p">)]</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
-        <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">window_size</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
-<span class="n">window_size</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">normalisasi_sliding_window</span><span class="p">(</span><span class="n">df_baru</span><span class="p">[</span><span class="s1">&#39;jumlah_pengunjung&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">window_size</span><span class="p">)</span>
-
-<span class="c1"># Menampilkan hasil</span>
-<span class="n">X</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;lag_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">window_size</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)]</span>
-<span class="n">y</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;target&#39;</span><span class="p">]</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      lag_3     lag_2     lag_1    target
-0  0.434783  0.260870  0.391304  0.130435
-1  0.260870  0.391304  0.130435  0.347826
-2  0.391304  0.130435  0.347826  0.173913
-3  0.130435  0.347826  0.173913  0.217391
-4  0.347826  0.173913  0.217391  0.304348
+[45260 rows x 23 columns]
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="transformasi-data">
-<h2>Transformasi Data<a class="headerlink" href="#transformasi-data" title="Link to this heading">#</a></h2>
-<p>membagi data menjadi data train dan data test, dengan presentase 80% data train dan 20% data test</p>
+<section class="tex2jax_ignore mathjax_ignore" id="step-2-data-preprocessing">
+<h1>Step 2: Data Preprocessing<a class="headerlink" href="#step-2-data-preprocessing" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Membagi data menjadi data train dan test (80% training, 20% testing)</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%Y %H:%M&#39;</span><span class="p">)</span>
+<span class="n">sales_column_name</span> <span class="o">=</span> <span class="s1">&#39;Quantity&#39;</span>
+<span class="n">daily_sales</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">date</span><span class="p">)[</span><span class="n">sales_column_name</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">daily_sales</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;InvoiceDate&#39;</span><span class="p">,</span> <span class="s1">&#39;sales&#39;</span><span class="p">]</span>
 
-<span class="c1"># Menampilkan jumlah data train dan test</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data train:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Jumlah data test:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Jumlah data train: 172
-Jumlah data test: 43
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="modeling">
-<h2>Modeling<a class="headerlink" href="#modeling" title="Link to this heading">#</a></h2>
-<section id="evaluasi-model">
-<h3>Evaluasi Model<a class="headerlink" href="#evaluasi-model" title="Link to this heading">#</a></h3>
-<section id="mse-mean-squared-error">
-<h4>1. MSE (Mean Squared Error)<a class="headerlink" href="#mse-mean-squared-error" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p><em>Definisi</em>: MSE adalah rata-rata dari kuadrat selisih antara nilai yang diprediksi dan nilai aktual.</p></li>
-<li><p><em>Rumus</em>:
-$<span class="math notranslate nohighlight">\(
-\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
-\)</span><span class="math notranslate nohighlight">\(
-Di mana \)</span>y_i<span class="math notranslate nohighlight">\( adalah nilai aktual, \)</span>\hat{y}_i<span class="math notranslate nohighlight">\( adalah nilai prediksi, dan \)</span>n$ adalah jumlah data.</p></li>
-</ul>
-</section>
-<section id="rmse-root-mean-squared-error">
-<h4>2. RMSE (Root Mean Squared Error)<a class="headerlink" href="#rmse-root-mean-squared-error" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p><em>Definisi</em>: RMSE adalah akar kuadrat dari MSE, yang mengembalikan satuan ke skala yang sama dengan data asli.</p></li>
-<li><p><em>Rumus</em>:
-$<span class="math notranslate nohighlight">\(
-\text{RMSE} = \sqrt{\text{MSE}}
-\)</span>$</p></li>
-</ul>
-</section>
-<section id="mape-mean-absolute-percentage-error">
-<h4>3. MAPE (Mean Absolute Percentage Error)<a class="headerlink" href="#mape-mean-absolute-percentage-error" title="Link to this heading">#</a></h4>
-<ul class="simple">
-<li><p><em>Definisi</em>: MAPE mengukur kesalahan dalam prediksi sebagai persentase dari nilai aktual.</p></li>
-<li><p><em>Rumus</em>:
-$<span class="math notranslate nohighlight">\(
-\text{MAPE} = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\%
-\)</span>$</p></li>
-</ul>
-</section>
-</section>
-<section id="begging-regresor">
-<h3>Begging Regresor<a class="headerlink" href="#begging-regresor" title="Link to this heading">#</a></h3>
-<p>Rumus algoritma decision tree:</p>
-<ul>
-<li><p>Menghitung Entropy</p>
-<p>untuk menghitung ketidakpastian dalam data.</p>
-<div class="math notranslate nohighlight">
-\[
-  \text {H(S)} = - \sum_{i=1}^{k} {p_i} . {log_2(p_i)}
-  \]</div>
-<p><span class="math notranslate nohighlight">\({H(S)}\)</span>: Entropi dari dataset <span class="math notranslate nohighlight">\(S\)</span></p>
-<p><span class="math notranslate nohighlight">\({p_i}\)</span>: Proporsi sampel kelas ke-<span class="math notranslate nohighlight">\(i\)</span> dalam dataset <span class="math notranslate nohighlight">\(S\)</span>.</p>
-<p><span class="math notranslate nohighlight">\({k}\)</span>: Jumlah kelas dalam dataset.</p>
-</li>
-<li><p>Menghitung Gain</p>
-<div class="math notranslate nohighlight">
-\[
-  \text {IG}{(S,A)} = {H(S)} - \sum_{v∈V}^{k} \frac{|S_v|}{|S|} . {H}{(S_v)}
-  \]</div>
-<p><span class="math notranslate nohighlight">\({H(S)}\)</span> : Entropi dataset sebelum split.</p>
-<p><span class="math notranslate nohighlight">\({S_v}\)</span> : Subset data setelah split berdasarkan nilai <span class="math notranslate nohighlight">\({v}\)</span> dari fitur <span class="math notranslate nohighlight">\({A}\)</span>.</p>
-<p><span class="math notranslate nohighlight">\({|S_v|}\)</span> : Jumlah sampel dalam subset <span class="math notranslate nohighlight">\({|S_v|}\)</span>.</p>
-<p><span class="math notranslate nohighlight">\({|S|}\)</span> : Total sampel dalam dataset <span class="math notranslate nohighlight">\({S}\)</span>.</p>
-</li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_begging</span> <span class="o">=</span> <span class="n">BaggingRegressor</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">DecisionTreeRegressor</span><span class="p">(),</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model_begging</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_begging</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\ensemble\_bagging.py:581: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  return column_or_1d(y, warn=True)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># memprediksi jumlah pengunjung 7 hari ke depan</span>
-<span class="k">def</span> <span class="nf">predict_future</span><span class="p">(</span><span class="n">model_begging</span><span class="p">,</span> <span class="n">last_window</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">future_predictions</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
-        <span class="c1"># Ensure current_window has the same column order as X_train</span>
-        <span class="n">current_window</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">last_window</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-        <span class="n">prediction</span> <span class="o">=</span> <span class="n">model_begging</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">current_window</span><span class="p">)</span>
-        <span class="n">future_predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="c1"># Update current window dengan prediksi terbaru</span>
-        <span class="n">last_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">last_window</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">last_window</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">future_predictions</span>
 
-<span class="c1"># # Ambil jendela terakhir dari data</span>
-<span class="n">last_window</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="n">daily_sales</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;lag_</span><span class="si">{</span><span class="n">lag</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">daily_sales</span><span class="p">[</span><span class="s1">&#39;sales&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
 
-<span class="c1"># # Prediksi 3 hari ke depan</span>
-<span class="n">future_steps</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">future_predictions</span> <span class="o">=</span> <span class="n">predict_future</span><span class="p">(</span><span class="n">model_begging</span><span class="p">,</span> <span class="n">last_window</span><span class="p">,</span> <span class="n">future_steps</span><span class="p">)</span>
+<span class="c1"># Drop rows with NaN values (due to lagging)</span>
+<span class="n">daily_sales</span> <span class="o">=</span> <span class="n">daily_sales</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 
-<span class="c1"># # Tampilkan prediksi masa depan</span>
-<span class="c1"># future_df = pd.date_range(start=df_baru[&#39;date&#39;].iloc[-1] + pd.DateOffset(days=1), periods=future_steps, freq=&#39;D&#39;)</span>
-<span class="n">future_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">df_baru</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">periods</span><span class="o">=</span><span class="n">future_steps</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;jumlah pengunjung 3 hari ke depan &quot;</span><span class="p">,</span><span class="n">future_predictions</span><span class="p">)</span>
+<span class="c1"># Step 3: Feature Engineering</span>
+<span class="c1"># Use lag features as predictors</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">daily_sales</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;lag&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">daily_sales</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">daily_sales</span><span class="p">[</span><span class="s1">&#39;sales&#39;</span><span class="p">]</span>
 
+<span class="c1"># Split data training dan data testing</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Step 4: Train Model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Step 5: Recursive Multi-step Forecasting</span>
+<span class="k">def</span> <span class="nf">multi_step_forecast</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_last</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">):</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">X_current</span> <span class="o">=</span> <span class="n">X_last</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_steps</span><span class="p">):</span>
+        <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="n">X_current</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Predict next step</span>
+        <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
+
+        <span class="c1"># Update features (shift by 1 step, add predicted value as the latest lag)</span>
+        <span class="n">X_current</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">X_current</span><span class="p">,</span> <span class="n">shift</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">X_current</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_pred</span>
+
+    <span class="k">return</span> <span class="n">predictions</span>
+
+<span class="c1"># Use the last row of X_test as the starting point for forecasting</span>
+<span class="n">X_last</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">n_steps</span> <span class="o">=</span> <span class="mi">7</span>  <span class="c1"># Number of days to predict</span>
+
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">multi_step_forecast</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_last</span><span class="p">,</span> <span class="n">n_steps</span><span class="p">)</span>
+
+<span class="c1"># Step 6: Evaluate and Plot Results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted sales for the next 7 days:&quot;</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
+
+<span class="c1"># Plot actual vs predicted sales</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_baru</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df_baru</span><span class="p">[</span><span class="s1">&#39;jumlah_pengunjung&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Aktual&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">future_df</span><span class="p">,</span> <span class="n">future_predictions</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Prediksi 3 Hari ke Depan&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Prediksi Jumlah Pengunjung 3 Hari ke Depan&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tanggal&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Prediksi Jumlah Pengunjung&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted Sales&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Multi-step Sales Forecasting&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Days Ahead&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Sales&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jumlah pengunjung 3 hari ke depan  [0.4217391304347828, 0.33260869565217405, 0.4304347826086956]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:493: UserWarning: X does not have valid feature names, but RandomForestRegressor was fitted with feature names
+  warnings.warn(
+C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:493: UserWarning: X does not have valid feature names, but RandomForestRegressor was fitted with feature names
+  warnings.warn(
+C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:493: UserWarning: X does not have valid feature names, but RandomForestRegressor was fitted with feature names
+  warnings.warn(
+C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:493: UserWarning: X does not have valid feature names, but RandomForestRegressor was fitted with feature names
+  warnings.warn(
+C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:493: UserWarning: X does not have valid feature names, but RandomForestRegressor was fitted with feature names
+  warnings.warn(
+C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:493: UserWarning: X does not have valid feature names, but RandomForestRegressor was fitted with feature names
+  warnings.warn(
+C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\base.py:493: UserWarning: X does not have valid feature names, but RandomForestRegressor was fitted with feature names
+  warnings.warn(
 </pre></div>
 </div>
-<img alt="_images/9f0f6f2df217a0a04e25d90f9279fe14eda6e51082e53f44b589adff211cdd31.png" src="_images/9f0f6f2df217a0a04e25d90f9279fe14eda6e51082e53f44b589adff211cdd31.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung MSE, MAE, RMSE, R² dan MAPE</span>
-<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-<span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
-<span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-<span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Bagging Regressor&#39;</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> MSE: </span><span class="si">{</span><span class="n">mse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAE: </span><span class="si">{</span><span class="n">mae</span><span class="si">}</span><span class="se">\n</span><span class="s2"> RMSE: </span><span class="si">{</span><span class="n">rmse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> R²: </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAPE: </span><span class="si">{</span><span class="n">mape</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Predicted sales for the next 7 days: [13845.52, 12160.16, 12650.76, 12287.63, 12408.31, 12393.63, 12050.65]
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bagging Regressor 
- MSE: 0.03836109377060711
- MAE: 0.15534209639366364
- RMSE: 0.19585988300468044
- R²: -0.02039028064831938
- MAPE: 32331200560496.82%
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="linear-regression">
-<h3>Linear Regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h3>
-<p>Rumus algoritma Regresi Linear</p>
-<p>Regresi linear dapat dinyatakan dengan rumus:</p>
-<div class="math notranslate nohighlight">
-\[
-y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon
-\]</div>
-<p>di mana:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(y\)</span> adalah variabel dependen (target).</p></li>
-<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span> adalah intercept (konstanta).</p></li>
-<li><p><span class="math notranslate nohighlight">\(\beta_1, \beta_2, \ldots, \beta_n\)</span> adalah koefisien regresi untuk masing-masing variabel independen <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_n\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\epsilon\)</span> adalah error atau residual.</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model Linear Regression</span>
-<span class="n">model_linear</span> <span class="o">=</span> <span class="n">BaggingRegressor</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">LinearRegression</span><span class="p">(),</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model_linear</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">y_pred_linear</span> <span class="o">=</span> <span class="n">model_linear</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\ensemble\_bagging.py:581: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  return column_or_1d(y, warn=True)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># memprediksi jumlah pengunjung 7 hari ke depan</span>
-<span class="k">def</span> <span class="nf">predict_future</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">last_window</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">future_predictions</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
-        <span class="n">current_window</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">last_window</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-        <span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">current_window</span><span class="p">)</span>
-        <span class="n">future_predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="c1"># Update current window dengan prediksi terbaru</span>
-        <span class="n">last_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">last_window</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">last_window</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">future_predictions</span>
-
-<span class="c1"># # Ambil jendela terakhir dari data</span>
-<span class="n">last_window</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># # Prediksi 3 hari ke depan</span>
-<span class="n">future_steps</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">future_predictions</span> <span class="o">=</span> <span class="n">predict_future</span><span class="p">(</span><span class="n">model_linear</span><span class="p">,</span> <span class="n">last_window</span><span class="p">,</span> <span class="n">future_steps</span><span class="p">)</span>
-
-<span class="c1"># # Tampilkan prediksi masa depan</span>
-<span class="c1"># future_df = pd.date_range(start=df_baru[&#39;date&#39;].iloc[-1] + pd.DateOffset(days=1), periods=future_steps, freq=&#39;D&#39;)</span>
-<span class="n">future_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">df_baru</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">periods</span><span class="o">=</span><span class="n">future_steps</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;jumlah pengunjung 3 hari ke depan &quot;</span><span class="p">,</span><span class="n">future_predictions</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_baru</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df_baru</span><span class="p">[</span><span class="s1">&#39;jumlah_pengunjung&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Aktual&#39;</span><span class="p">)</span>
-<span class="c1"># plt.plot(X_test.index, y_pred, label=&#39;Prediksi Linear Regression (Test)&#39;, color=&#39;green&#39;, linestyle=&#39;--&#39;)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">future_df</span><span class="p">,</span> <span class="n">future_predictions</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Prediksi 3 Hari ke Depan&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Prediksi Jumlah Pengunjung 3 Hari ke Depan dengan Linear Regresion&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tanggal&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Prediksi Jumlah Pengunjung&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>jumlah pengunjung 3 hari ke depan  [0.4057041903961848, 0.43782460834610015, 0.39629435861884466]
-</pre></div>
-</div>
-<img alt="_images/0c3c2150ea309bd8287296efa120d381d7c10412e8eafcc4a79b62e6b4159499.png" src="_images/0c3c2150ea309bd8287296efa120d381d7c10412e8eafcc4a79b62e6b4159499.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung MSE, MAE, RMSE, R² dan MAPE</span>
-<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_linear</span><span class="p">)</span>
-<span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_linear</span><span class="p">)</span>
-<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
-<span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_linear</span><span class="p">)</span>
-<span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_linear</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Linear Regression&#39;</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> MSE: </span><span class="si">{</span><span class="n">mse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAE: </span><span class="si">{</span><span class="n">mae</span><span class="si">}</span><span class="se">\n</span><span class="s2"> RMSE: </span><span class="si">{</span><span class="n">rmse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> R²: </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAPE: </span><span class="si">{</span><span class="n">mape</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Linear Regression 
- MSE: 0.03203098961882884
- MAE: 0.13880708757109858
- RMSE: 0.17897203585708255
- R²: 0.1479880453345349
- MAPE: 23832338379330.22%
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="support-vector-machine">
-<h3>Support Vector Machine<a class="headerlink" href="#support-vector-machine" title="Link to this heading">#</a></h3>
-<p>Rumus Algoritma SVM</p>
-<div class="math notranslate nohighlight">
-\[
-\hat{y}_i = \sum_{i=1}^{n} ({α}_i - {α}_i^*) K({x}_i, {x})+b
-\]</div>
-<p><span class="math notranslate nohighlight">\(\hat{y}\)</span> : Prediksi nilai target.</p>
-<p><span class="math notranslate nohighlight">\({n}\)</span> : Jumlah sampel pelatihan.</p>
-<p><span class="math notranslate nohighlight">\({α}_i, {α}_i^*\)</span> : Parameter Lagrange yang dioptimalkan selama pelatihan.</p>
-<p><span class="math notranslate nohighlight">\(K({x}_i, {x})\)</span> : Kernel yang mengukur kesamaan antara data pelatihan <span class="math notranslate nohighlight">\({(x_i)}\)</span> dan data uji <span class="math notranslate nohighlight">\({x}\)</span> .</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_svm</span> <span class="o">=</span> <span class="n">SVR</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">model_svm</span> <span class="o">=</span> <span class="n">BaggingRegressor</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">model_svm</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">model_svm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">y_pred_svm</span> <span class="o">=</span> <span class="n">model_svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\ASUS\AppData\Local\Programs\Python\Python310\lib\site-packages\sklearn\ensemble\_bagging.py:581: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
-  return column_or_1d(y, warn=True)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predict_future</span><span class="p">(</span><span class="n">model_svm</span><span class="p">,</span> <span class="n">last_window</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">future_predictions</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
-        <span class="n">current_window</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">last_window</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="n">X_train</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-        <span class="n">prediction</span> <span class="o">=</span> <span class="n">model_svm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">current_window</span><span class="p">)</span>
-        <span class="n">future_predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="c1"># Update current window dengan prediksi terbaru</span>
-        <span class="n">last_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">last_window</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">last_window</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">future_predictions</span>
-
-<span class="c1"># Ambil jendela terakhir dari data</span>
-<span class="n">last_window</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># Prediksi 3 hari ke depan</span>
-<span class="n">future_steps</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">future_predictions</span> <span class="o">=</span> <span class="n">predict_future</span><span class="p">(</span><span class="n">model_svm</span><span class="p">,</span> <span class="n">last_window</span><span class="p">,</span> <span class="n">future_steps</span><span class="p">)</span>
-
-<span class="c1"># Membuat tanggal untuk prediksi masa depan</span>
-<span class="n">future_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">df_baru</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">DateOffset</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">periods</span><span class="o">=</span><span class="n">future_steps</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
-
-<span class="c1"># Menampilkan prediksi jumlah pengunjung</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediksi jumlah pengunjung 3 hari ke depan:&quot;</span><span class="p">,</span> <span class="n">future_predictions</span><span class="p">)</span>
-
-<span class="c1"># Visualisasi prediksi</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_baru</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">df_baru</span><span class="p">[</span><span class="s1">&#39;jumlah_pengunjung&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Data Aktual&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">future_df</span><span class="p">,</span> <span class="n">future_predictions</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Prediksi 3 Hari ke Depan (SVM)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Prediksi Jumlah Pengunjung 3 Hari ke Depan dengan SVM&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Tanggal&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Prediksi Jumlah Pengunjung&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Prediksi jumlah pengunjung 3 hari ke depan: [0.353555949243501, 0.36005063084462036, 0.41199429058249065]
-</pre></div>
-</div>
-<img alt="_images/67b665cdfcd87fdfeb585c368ef66e766e9df29c436c6a4985fb3525d1225748.png" src="_images/67b665cdfcd87fdfeb585c368ef66e766e9df29c436c6a4985fb3525d1225748.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Menghitung MSE, MAE, RMSE, R² dan MAPE</span>
-<span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_svm</span><span class="p">)</span>
-<span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_svm</span><span class="p">)</span>
-<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">)</span>
-<span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_svm</span><span class="p">)</span>
-<span class="n">mape</span> <span class="o">=</span> <span class="n">mean_absolute_percentage_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_svm</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Support Vector Machine&#39;</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2"> MSE: </span><span class="si">{</span><span class="n">mse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAE: </span><span class="si">{</span><span class="n">mae</span><span class="si">}</span><span class="se">\n</span><span class="s2"> RMSE: </span><span class="si">{</span><span class="n">rmse</span><span class="si">}</span><span class="se">\n</span><span class="s2"> R²: </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="se">\n</span><span class="s2"> MAPE: </span><span class="si">{</span><span class="n">mape</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Support Vector Machine 
- MSE: 0.032661112624533487
- MAE: 0.13405745187860996
- RMSE: 0.18072385737509447
- R²: 0.13122701671322412
- MAPE: 23047114794907.586%
-</pre></div>
-</div>
+<img alt="_images/e437b57ea11e5d98ad684e2c6a99cdd1ed6c323481c60cb3a3ef829df6288b14.png" src="_images/e437b57ea11e5d98ad684e2c6a99cdd1ed6c323481c60cb3a3ef829df6288b14.png" />
 </div>
 </div>
 <p>Kesimpulan dari hasil prediksi menggunakan ke-3 model tersebut, didapatkan best model nya yaitu prediksi menggunakan Linear regression.</p>
-</section>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1155,6 +629,15 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon
         <p class="prev-next-title">Analisis Perilaku Konsumen Berdasarkan Data Penjualan Retail</p>
       </div>
     </a>
+    <a class="right-next"
+       href="projek3.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Prediksi Jumlah Pengunjung Coffee Shop</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1172,29 +655,15 @@ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Prediksi Penjualan Retai</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latar-belakang">Latar Belakang</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tujuan">Tujuan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumusan-masalah">Rumusan masalah</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-understanding">Data Understanding</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-pre-processing">Data Pre-Processing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sliding-window">Sliding Window</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi">Normalisasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rumusan-masalah">Rumusan Masalah</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformasi-data">Transformasi Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling">Modeling</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluasi-model">Evaluasi Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mse-mean-squared-error">1. MSE (Mean Squared Error)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rmse-root-mean-squared-error">2. RMSE (Root Mean Squared Error)</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#mape-mean-absolute-percentage-error">3. MAPE (Mean Absolute Percentage Error)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-data-preprocessing">Step 2: Data Preprocessing</a></li>
 </ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#begging-regresor">Begging Regresor</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#support-vector-machine">Support Vector Machine</a></li>
-</ul>
-</li>
-</ul>
+
   </nav></div>
 
 </div></div>

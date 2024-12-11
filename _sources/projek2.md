@@ -12,408 +12,98 @@ kernelspec:
   name: python3
 ---
 
-# Prediksi Jumlah Pengunjung Coffee Shop
+# Prediksi Penjualan Retai
 
 ### Latar Belakang
 
-Coffee shop telah menjadi bagian penting dalam gaya hidup masyarakat modern, Tidak hanya menjadi tempat untuk menikmati kopi, coffee shop juga berfungsi sebagai tempat bersosialisasi, bekerja, belajar, dan bahkan menghadiri berbagai acara. Dengan semakin banyaknya coffee shop yang bermunculan, persaingan antar bisnis semakin ketat. Maka diperlukan kemampuan untuk memprediksi jumlah pengunjung. Data yang digunakan dalam pengerjaan tugas ini berupa data time series penjualan coffe sales yang didapat dari website kaggle [Coffe Sales](https://www.kaggle.com/datasets/ihelon/coffee-sales/data). Dengan memprediksi jumlah pengunjung yang membeli di coffe sales 3 hari kedepan.
+Di era digital saat ini, pemilik retail harus mampu memahami strategi pemasaran yang efektif. Dengan begitu pemilik retail dapat dengan mudah mengatur kesediaan produk yang akan dipasarkan
 
 ### Tujuan
 
-- Untuk mengoptimalkan perencanaan operasional
-- Untuk meningkatkan efisiensi biaya produksi dan tenaga kerja
+Untuk mengelola peningkatan penjualan toko retail
 
-### Rumusan masalah
+### Rumusan Masalah
 
-Bagaimana prediksi jumlah pengunjung dalam kurun waktu 3 hari kedepan?
+Bagaimana prediksi penjualan 7 hari kedepan?
 
 ```{code-cell}
 import pandas as pd
 import numpy as np
-import datetime
-import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.ensemble import BaggingRegressor
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.datasets import make_regression
-from sklearn.linear_model import LinearRegression
-from sklearn.svm import SVR
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score, mean_absolute_percentage_error
+from sklearn.metrics import mean_squared_error
+import matplotlib.pyplot as plt
 ```
 
 ```{code-cell}
-data = 'https://raw.githubusercontent.com/fadh54/Tugas_PSD/refs/heads/main/sales_coffe.csv'
-df_baru = pd.read_csv(data, delimiter=';')
-print(df_baru)
+# Step 1: Load the dataset
+url = "https://raw.githubusercontent.com/fadh54/Tugas_PSD/refs/heads/main/Retail.csv"
+data = pd.read_csv(url, delimiter=';')
+print(data)
 ```
 
-Menampilkan data yang akan digunakan untuk melakukan prediksi
-
-## Data Understanding
+# Step 2: Data Preprocessing
 
 ```{code-cell}
-# Merubah kolom 'Date' dalam format datetime dengan dayfirst=True
-df_baru['date'] = pd.to_datetime(df_baru['date'], dayfirst=True, errors='coerce')
 
-# Mengatur kolom 'Date' sebagai indeks
-df_baru.set_index('date', inplace=True)
-```
+data['InvoiceDate'] = pd.to_datetime(data['InvoiceDate'], format='%d/%m/%Y %H:%M')
+sales_column_name = 'Quantity'
+daily_sales = data.groupby(data['InvoiceDate'].dt.date)[sales_column_name].sum().reset_index()
+daily_sales.columns = ['InvoiceDate', 'sales']
 
-```{code-cell}
-df_baru.head()
-```
 
-```{code-cell}
-df_baru.plot()
-```
+for lag in range(1, 8):
+    daily_sales[f'lag_{lag}'] = daily_sales['sales'].shift(lag)
 
-Menampilkan grafik data pengunjung dari tanggal 01/03/2024 sampai dengan tanggal 07/10/2024
+# Drop rows with NaN values (due to lagging)
+daily_sales = daily_sales.dropna()
 
-```{code-cell}
-df_baru.shape
-```
+# Step 3: Feature Engineering
+# Use lag features as predictors
+features = [col for col in daily_sales.columns if 'lag' in col]
+X = daily_sales[features]
+y = daily_sales['sales']
 
-```{code-cell}
-df_baru.info()
-```
+# Split data training dan data testing
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, shuffle=False)
 
-```{code-cell}
-df_baru.dtypes
-```
+# Step 4: Train Model
+model = RandomForestRegressor(random_state=42)
+model.fit(X_train, y_train)
 
-```{code-cell}
-df_baru.isnull().sum()
-```
+# Step 5: Recursive Multi-step Forecasting
+def multi_step_forecast(model, X_last, n_steps):
+    predictions = []
+    X_current = X_last.copy()
 
-```{code-cell}
-df_baru.describe()
-```
+    for _ in range(n_steps):
+        y_pred = model.predict([X_current])[0]  # Predict next step
+        predictions.append(y_pred)
 
-## Data Pre-Processing
+        # Update features (shift by 1 step, add predicted value as the latest lag)
+        X_current = np.roll(X_current, shift=-1)
+        X_current[-1] = y_pred
 
-Data pre-pocessing adalah proses mengolah data mentah yang didapat menjadi data yang lebih bersih agar mudah untuk diolah
+    return predictions
 
-### Sliding Window
+# Use the last row of X_test as the starting point for forecasting
+X_last = X_test.iloc[-1].values
+n_steps = 7  # Number of days to predict
 
-melakukan slidding window untuk mendapatkan data penjualan 3 hari sebelumnya yang akan digunakan untuk melakukan prediksi jumlah pengunjung
+predictions = multi_step_forecast(model, X_last, n_steps)
 
-```{code-cell}
-def sliding_window(data, window_size):
-    X, y = [], []
-    for i in range(len(data) - window_size):
-        X.append(data[i:(i + window_size)].flatten())
-        y.append(data[i + window_size])
-    return pd.DataFrame(X), pd.DataFrame(y)
+# Step 6: Evaluate and Plot Results
+print("Predicted sales for the next 7 days:", predictions)
 
-# Menggunakan fungsi sliding window
-window_size = 3
-X, y = sliding_window(df_baru['jumlah_pengunjung'].values.reshape(-1, 1), window_size)
-
-# Menampilkan hasil
-X.columns = [f'lag_{i}' for i in range(window_size,0,-1)]
-y.columns = ['target']
-result = pd.concat([X, y], axis=1)
-
-print(result.head())
-```
-
-### Normalisasi
-
-data slidding window yang sudah didapatkan akan dinormalisasi
-
-```{code-cell}
-target = df_baru['jumlah_pengunjung']
-
-# Scale data
-scaler = MinMaxScaler()
-df_baru['jumlah_pengunjung'] = scaler.fit_transform(df_baru[['jumlah_pengunjung']])
-
-def normalisasi_sliding_window(data, window_size):
-    X, y = [], []
-    for i in range(len(data) - window_size):
-        X.append(data[i:(i + window_size)].flatten())
-        y.append(data[i + window_size])
-    return pd.DataFrame(X), pd.DataFrame(y)
-
-window_size = 3
-X, y = normalisasi_sliding_window(df_baru['jumlah_pengunjung'].values.reshape(-1, 1), window_size)
-
-# Menampilkan hasil
-X.columns = [f'lag_{i}' for i in range(window_size,0,-1)]
-y.columns = ['target']
-result = pd.concat([X, y], axis=1)
-
-print(result.head())
-```
-
-## Transformasi Data
-
-membagi data menjadi data train dan data test, dengan presentase 80% data train dan 20% data test
-
-```{code-cell}
-# Membagi data menjadi data train dan test (80% training, 20% testing)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Menampilkan jumlah data train dan test
-print("Jumlah data train:", len(X_train))
-print("Jumlah data test:", len(X_test))
-```
-
-## Modeling
-
-### Evaluasi Model
-
-#### 1. MSE (Mean Squared Error)
-
-- _Definisi_: MSE adalah rata-rata dari kuadrat selisih antara nilai yang diprediksi dan nilai aktual.
-- _Rumus_:
-  $$
-  \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
-  $$
-  Di mana $y_i$ adalah nilai aktual, $\hat{y}_i$ adalah nilai prediksi, dan $n$ adalah jumlah data.
-
-#### 2. RMSE (Root Mean Squared Error)
-
-- _Definisi_: RMSE adalah akar kuadrat dari MSE, yang mengembalikan satuan ke skala yang sama dengan data asli.
-- _Rumus_:
-  $$
-  \text{RMSE} = \sqrt{\text{MSE}}
-  $$
-
-#### 3. MAPE (Mean Absolute Percentage Error)
-
-- _Definisi_: MAPE mengukur kesalahan dalam prediksi sebagai persentase dari nilai aktual.
-- _Rumus_:
-  $$
-  \text{MAPE} = \frac{1}{n} \sum_{i=1}^{n} \left| \frac{y_i - \hat{y}_i}{y_i} \right| \times 100\%
-  $$
-
-### Begging Regresor
-
-Rumus algoritma decision tree:
-
-- Menghitung Entropy
-
-  untuk menghitung ketidakpastian dalam data.
-
-  $$
-  \text {H(S)} = - \sum_{i=1}^{k} {p_i} . {log_2(p_i)}
-  $$
-
-  ${H(S)}$: Entropi dari dataset $S$
-
-  ${p_i}$: Proporsi sampel kelas ke-$i$ dalam dataset $S$.
-
-  ${k}$: Jumlah kelas dalam dataset.
-
-- Menghitung Gain
-
-  $$
-  \text {IG}{(S,A)} = {H(S)} - \sum_{v∈V}^{k} \frac{|S_v|}{|S|} . {H}{(S_v)}
-  $$
-
-  ${H(S)}$ : Entropi dataset sebelum split.
-
-  ${S_v}$ : Subset data setelah split berdasarkan nilai ${v}$ dari fitur ${A}$.
-
-  ${|S_v|}$ : Jumlah sampel dalam subset ${|S_v|}$.
-
-  ${|S|}$ : Total sampel dalam dataset ${S}$.
-
-```{code-cell}
-model_begging = BaggingRegressor(estimator=DecisionTreeRegressor(), n_estimators=20, random_state=42)
-model_begging.fit(X_train, y_train)
-y_pred = model_begging.predict(X_test)
-```
-
-```{code-cell}
-# memprediksi jumlah pengunjung 7 hari ke depan
-def predict_future(model_begging, last_window, steps=1):
-    future_predictions = []
-    for _ in range(steps):
-        # Ensure current_window has the same column order as X_train
-        current_window = pd.DataFrame([last_window], columns=X_train.columns)
-        prediction = model_begging.predict(current_window)
-        future_predictions.append(prediction[0])
-        # Update current window dengan prediksi terbaru
-        last_window = np.roll(last_window, -1)
-        last_window[-1] = prediction[0]
-    return future_predictions
-
-# # Ambil jendela terakhir dari data
-last_window = X.values[-1]
-
-# # Prediksi 3 hari ke depan
-future_steps = 3
-future_predictions = predict_future(model_begging, last_window, future_steps)
-
-# # Tampilkan prediksi masa depan
-# future_df = pd.date_range(start=df_baru['date'].iloc[-1] + pd.DateOffset(days=1), periods=future_steps, freq='D')
-future_df = pd.date_range(start=df_baru.index[-1] + pd.DateOffset(days=1), periods=future_steps, freq='D')
-print("jumlah pengunjung 3 hari ke depan ",future_predictions)
-
+# Plot actual vs predicted sales
 plt.figure(figsize=(10, 5))
-plt.plot(df_baru.index, df_baru['jumlah_pengunjung'], label='Data Aktual')
-plt.plot(future_df, future_predictions, label='Prediksi 3 Hari ke Depan', linestyle='--')
-plt.title('Prediksi Jumlah Pengunjung 3 Hari ke Depan')
-plt.xlabel('Tanggal')
-plt.ylabel('Prediksi Jumlah Pengunjung')
-plt.grid()
+plt.plot(range(1, n_steps + 1), predictions, marker='o', label='Predicted Sales')
+plt.title('Multi-step Sales Forecasting')
+plt.xlabel('Days Ahead')
+plt.ylabel('Sales')
 plt.legend()
-plt.show()
-```
-
-```{code-cell}
-# Menghitung MSE, MAE, RMSE, R² dan MAPE
-mse = mean_squared_error(y_test, y_pred)
-mae = mean_absolute_error(y_test, y_pred)
-rmse = np.sqrt(mse)
-r2 = r2_score(y_test, y_pred)
-mape = mean_absolute_percentage_error(y_test, y_pred)
-
-print(f"{'Bagging Regressor'} \n MSE: {mse}\n MAE: {mae}\n RMSE: {rmse}\n R²: {r2}\n MAPE: {mape}%")
-```
-
-### Linear Regression
-
-Rumus algoritma Regresi Linear
-
-Regresi linear dapat dinyatakan dengan rumus:
-
-$$
-y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n + \epsilon
-$$
-
-di mana:
-
-- $y$ adalah variabel dependen (target).
-- $\beta_0$ adalah intercept (konstanta).
-- $\beta_1, \beta_2, \ldots, \beta_n$ adalah koefisien regresi untuk masing-masing variabel independen $x_1, x_2, \ldots, x_n$.
-- $\epsilon$ adalah error atau residual.
-
-```{code-cell}
-# Model Linear Regression
-model_linear = BaggingRegressor(estimator=LinearRegression(), n_estimators=20, random_state=42)
-model_linear.fit(X_train, y_train)
-y_pred_linear = model_linear.predict(X_test)
-```
-
-```{code-cell}
-# memprediksi jumlah pengunjung 7 hari ke depan
-def predict_future(model, last_window, steps=1):
-    future_predictions = []
-    for _ in range(steps):
-        current_window = pd.DataFrame([last_window], columns=X_train.columns)
-        prediction = model.predict(current_window)
-        future_predictions.append(prediction[0])
-        # Update current window dengan prediksi terbaru
-        last_window = np.roll(last_window, -1)
-        last_window[-1] = prediction[0]
-    return future_predictions
-
-# # Ambil jendela terakhir dari data
-last_window = X.values[-1]
-
-# # Prediksi 3 hari ke depan
-future_steps = 3
-future_predictions = predict_future(model_linear, last_window, future_steps)
-
-# # Tampilkan prediksi masa depan
-# future_df = pd.date_range(start=df_baru['date'].iloc[-1] + pd.DateOffset(days=1), periods=future_steps, freq='D')
-future_df = pd.date_range(start=df_baru.index[-1] + pd.DateOffset(days=1), periods=future_steps, freq='D')
-print("jumlah pengunjung 3 hari ke depan ",future_predictions)
-
-plt.figure(figsize=(10, 5))
-plt.plot(df_baru.index, df_baru['jumlah_pengunjung'], label='Data Aktual')
-# plt.plot(X_test.index, y_pred, label='Prediksi Linear Regression (Test)', color='green', linestyle='--')
-plt.plot(future_df, future_predictions, label='Prediksi 3 Hari ke Depan',color='green', linestyle='--')
-plt.title('Prediksi Jumlah Pengunjung 3 Hari ke Depan dengan Linear Regresion')
-plt.xlabel('Tanggal')
-plt.ylabel('Prediksi Jumlah Pengunjung')
 plt.grid()
-plt.legend()
 plt.show()
-```
-
-```{code-cell}
-# Menghitung MSE, MAE, RMSE, R² dan MAPE
-mse = mean_squared_error(y_test, y_pred_linear)
-mae = mean_absolute_error(y_test, y_pred_linear)
-rmse = np.sqrt(mse)
-r2 = r2_score(y_test, y_pred_linear)
-mape = mean_absolute_percentage_error(y_test, y_pred_linear)
-print(f"{'Linear Regression'} \n MSE: {mse}\n MAE: {mae}\n RMSE: {rmse}\n R²: {r2}\n MAPE: {mape}%")
-```
-
-### Support Vector Machine
-
-Rumus Algoritma SVM
-
-$$
-\hat{y}_i = \sum_{i=1}^{n} ({α}_i - {α}_i^*) K({x}_i, {x})+b
-$$
-
-$\hat{y}$ : Prediksi nilai target.
-
-${n}$ : Jumlah sampel pelatihan.
-
-${α}_i, {α}_i^*$ : Parameter Lagrange yang dioptimalkan selama pelatihan.
-
-$K({x}_i, {x})$ : Kernel yang mengukur kesamaan antara data pelatihan ${(x_i)}$ dan data uji ${x}$ .
-
-```{code-cell}
-model_svm = SVR(kernel='rbf', C=100, gamma=0.1, epsilon=0.1)
-model_svm = BaggingRegressor(estimator=model_svm, n_estimators=20, random_state=42)
-model_svm.fit(X_train, y_train)
-y_pred_svm = model_svm.predict(X_test)
-```
-
-```{code-cell}
-def predict_future(model_svm, last_window, steps=1):
-    future_predictions = []
-    for _ in range(steps):
-        current_window = pd.DataFrame([last_window], columns=X_train.columns)
-        prediction = model_svm.predict(current_window)
-        future_predictions.append(prediction[0])
-        # Update current window dengan prediksi terbaru
-        last_window = np.roll(last_window, -1)
-        last_window[-1] = prediction[0]
-    return future_predictions
-
-# Ambil jendela terakhir dari data
-last_window = X.values[-1]
-
-# Prediksi 3 hari ke depan
-future_steps = 3
-future_predictions = predict_future(model_svm, last_window, future_steps)
-
-# Membuat tanggal untuk prediksi masa depan
-future_df = pd.date_range(start=df_baru.index[-1] + pd.DateOffset(days=1), periods=future_steps, freq='D')
-
-# Menampilkan prediksi jumlah pengunjung
-print("Prediksi jumlah pengunjung 3 hari ke depan:", future_predictions)
-
-# Visualisasi prediksi
-plt.figure(figsize=(10, 5))
-plt.plot(df_baru.index, df_baru['jumlah_pengunjung'], label='Data Aktual', color='blue')
-plt.plot(future_df, future_predictions, label='Prediksi 3 Hari ke Depan (SVM)', color='green', linestyle='--')
-plt.title('Prediksi Jumlah Pengunjung 3 Hari ke Depan dengan SVM')
-plt.xlabel('Tanggal')
-plt.ylabel('Prediksi Jumlah Pengunjung')
-plt.grid()
-plt.legend()
-plt.show()
-```
-
-```{code-cell}
-# Menghitung MSE, MAE, RMSE, R² dan MAPE
-mse = mean_squared_error(y_test, y_pred_svm)
-mae = mean_absolute_error(y_test, y_pred_svm)
-rmse = np.sqrt(mse)
-r2 = r2_score(y_test, y_pred_svm)
-mape = mean_absolute_percentage_error(y_test, y_pred_svm)
-print(f"{'Support Vector Machine'} \n MSE: {mse}\n MAE: {mae}\n RMSE: {rmse}\n R²: {r2}\n MAPE: {mape}%")
 ```
 
 Kesimpulan dari hasil prediksi menggunakan ke-3 model tersebut, didapatkan best model nya yaitu prediksi menggunakan Linear regression.
